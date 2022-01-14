@@ -15,9 +15,6 @@ public class Author {
     @Column(name = "name")
     private String name;
 
-//    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-//    private List<Book> books;
-
     public Author() {
     }
 
@@ -30,13 +27,6 @@ public class Author {
         author.name = name;
         return author;
     }
-
-//    public void addBook(Book book) {
-//        if (books == null) {
-//            books = new ArrayList<>();
-//        }
-//        books.add(book);
-//    }
 
     public int getId() {
         return id;
