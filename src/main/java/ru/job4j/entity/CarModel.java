@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table
 public class CarModel {
 
     @Id
@@ -13,6 +14,10 @@ public class CarModel {
 
     @Column(name = "name")
     private String name;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "carbrand_id")
+    private CarBrand carBrand;
 
     public CarModel() {
     }
@@ -65,6 +70,7 @@ public class CarModel {
         return "CarModel{"
                 + "id=" + id
                 + ", name='" + name + '\''
+                + ", carBrand=" + carBrand
                 + '}';
     }
 }

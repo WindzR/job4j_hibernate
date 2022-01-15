@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Table
 public class CarBrand {
 
     @Id
@@ -16,8 +17,8 @@ public class CarBrand {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @Column(name = "model_id")
+    @OneToMany(mappedBy = "carBrand",
+               cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CarModel> models = new ArrayList<>();
 
     public CarBrand() {
