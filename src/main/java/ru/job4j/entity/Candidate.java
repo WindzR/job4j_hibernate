@@ -17,6 +17,11 @@ public class Candidate {
 
     private int salary;
 
+    @OneToOne(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY)
+    @JoinColumn(name = "database_id")
+    private DatabaseVacancies database;
+
     public Candidate() {
     }
 
@@ -66,6 +71,14 @@ public class Candidate {
         this.salary = salary;
     }
 
+    public DatabaseVacancies getDatabase() {
+        return database;
+    }
+
+    public void setDatabase(DatabaseVacancies database) {
+        this.database = database;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -91,6 +104,7 @@ public class Candidate {
                 + ", name='" + name + '\''
                 + ", expirience=" + expirience
                 + ", salary=" + salary
+                + ", database=" + database
                 + '}';
     }
 }
