@@ -30,7 +30,7 @@ public class HbmRun {
 
         hbmRun.deleteCandidate(2);
 
-        Candidate findByName = hbmRun.findCandidateByName("Polina");
+        List<Candidate> findByName = hbmRun.findCandidateByName("Polina");
         System.out.println(findByName);
     }
 
@@ -71,16 +71,16 @@ public class HbmRun {
         return candidate;
     }
 
-    private Candidate findCandidateByName(String name) {
-        Candidate candidate = null;
+    private List<Candidate> findCandidateByName(String name) {
+        List<Candidate> candidates = null;
         try {
             Session session = sf.openSession();
             session.beginTransaction();
-            candidate = (Candidate) session.createQuery(
+            candidates = session.createQuery(
                             "from Candidate can WHERE can.name = :nameParam"
                     )
                     .setParameter("nameParam", name)
-                    .uniqueResult();
+                    .getResultList();
             session.getTransaction().commit();
             session.close();
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class HbmRun {
         } finally {
             StandardServiceRegistryBuilder.destroy(registry);
         }
-        return candidate;
+        return candidates;
     }
 
     private Candidate updateCandidateById(String name, int expirience, int salary, int id) {
